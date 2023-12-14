@@ -84,7 +84,7 @@ if __name__ == "__main__":
             sys.exit(1)
 
         with open(key_path, 'rb') as keyfile:
-            key = key_path.read()
+            key = keyfile.read()
         decrypt_file(key, in_path, out_path)
         print(f"File '{in_path}' decrypted and saved as '{out_path}'.")
 
