@@ -101,3 +101,13 @@ def read_secure_email(public_key_path):
                 os.remove(encrypted_attachment_path)
                 os.remove(hash_attachment_path)
                 os.remove(signature_attachment_path)
+
+
+send_secure_email(
+    to="19p5097@eng.asu.edu.eg",
+    subject="Secure Email",
+    body="This is an encrypted message.",
+    # Just the file name is needed, not the full path
+    attachment_path="attachment.txt",
+    private_key_path="./Signature_Keys/sender_private_key.pem"
+)
