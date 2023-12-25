@@ -74,50 +74,50 @@ def generate_random_key():
 
 
 
-if __name__ == "__main__":
-    if len(sys.argv) != 5:
-        print("Usage: python script.py encrypt/decrypt input_file output_file key_file")
-        sys.exit(1)
+# if __name__ == "__main__":
+#     if len(sys.argv) != 5:
+#         print("Usage: python script.py encrypt/decrypt input_file output_file key_file")
+#         sys.exit(1)
 
-    action, input_filename, output_filename, key_file = sys.argv[
-        1], sys.argv[2], sys.argv[3], sys.argv[4]
-    input_dir = "Inputs"
-    output_dir = "Outputs"
-    key_dir = "Keys"
+#     action, input_filename, output_filename, key_file = sys.argv[
+#         1], sys.argv[2], sys.argv[3], sys.argv[4]
+#     input_dir = "Inputs"
+#     output_dir = "Outputs"
+#     key_dir = "Keys"
 
-    # Create directories if they don't exist
-    os.makedirs(input_dir, exist_ok=True)
-    os.makedirs(output_dir, exist_ok=True)
-    os.makedirs(key_dir, exist_ok=True)
+#     # Create directories if they don't exist
+#     os.makedirs(input_dir, exist_ok=True)
+#     os.makedirs(output_dir, exist_ok=True)
+#     os.makedirs(key_dir, exist_ok=True)
 
-    in_path = os.path.join(input_dir, input_filename)
-    out_path = os.path.join(output_dir, output_filename)
-    key_path = os.path.join(key_dir, key_file)
+#     in_path = os.path.join(input_dir, input_filename)
+#     out_path = os.path.join(output_dir, output_filename)
+#     key_path = os.path.join(key_dir, key_file)
 
-    if action == "encrypt":
-        key = generate_random_key()
-        iv = token_bytes(AES.block_size)
-        if not os.path.exists(in_path):
-            print(f"Error: Input file '{in_path}' does not exist.")
-            sys.exit(1)
+#     if action == "encrypt":
+#         key = generate_random_key()
+#         iv = token_bytes(AES.block_size)
+#         if not os.path.exists(in_path):
+#             print(f"Error: Input file '{in_path}' does not exist.")
+#             sys.exit(1)
 
-        encrypt_file(key, iv, in_path, out_path)
-        with open(key_path, 'wb') as keyfile:
-            keyfile.write(key)
-        print(
-            f"File '{in_path}' encrypted and saved as '{out_path}'. Key saved to '{key_path}'.")
+#         encrypt_file(key, iv, in_path, out_path)
+#         with open(key_path, 'wb') as keyfile:
+#             keyfile.write(key)
+#         print(
+#             f"File '{in_path}' encrypted and saved as '{out_path}'. Key saved to '{key_path}'.")
 
-    elif action == "decrypt":
-        if not os.path.exists(in_path) or not os.path.exists(key_path):
-            print(
-                f"Error: Input file '{in_path}' or key file '{key_path}' does not exist.")
-            sys.exit(1)
+#     elif action == "decrypt":
+#         if not os.path.exists(in_path) or not os.path.exists(key_path):
+#             print(
+#                 f"Error: Input file '{in_path}' or key file '{key_path}' does not exist.")
+#             sys.exit(1)
 
-        with open(key_path, 'rb') as keyfile:
-            key = keyfile.read()
-        decrypt_file(key, in_path, out_path)
-        print(f"File '{in_path}' decrypted and saved as '{out_path}'.")
+#         with open(key_path, 'rb') as keyfile:
+#             key = keyfile.read()
+#         decrypt_file(key, in_path, out_path)
+#         print(f"File '{in_path}' decrypted and saved as '{out_path}'.")
 
-    else:
-        print("Usage: python script.py encrypt/decrypt input_file output_file key_file")
-        sys.exit(1)
+#     else:
+#         print("Usage: python script.py encrypt/decrypt input_file output_file key_file")
+#         sys.exit(1)

@@ -44,10 +44,10 @@ def verify_signature(message, signature, public_key_path):
 
 
 # Simulate message transmission use case
-message_received = "This is a message from the sender"
-signature_received = signature
+# message_received = "This is a message from the sender"
+# signature_received = signature
 
-if verify_signature(message_received, signature_received, 'Signature_Keys/sender_public_key.pem'):
-    print("Signature verification successful. Message is authentic.")
-else:
-    print("Signature verification failed. Message may be tampered.")
+# if verify_signature(message_received, signature_received, 'Signature_Keys/sender_public_key.pem'):
+#     print("Signature verification successful. Message is authentic.")
+# else:
+#     print("Signature verification failed. Message may be tampered.")
