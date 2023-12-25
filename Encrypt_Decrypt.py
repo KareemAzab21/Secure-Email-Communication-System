@@ -40,8 +40,38 @@ def decrypt_file(key, in_filename, out_filename=None, chunksize=64*1024):
                 outfile.write(unpad(decryptor.decrypt(chunk), AES.block_size))
 
 
+def encrypt_content(key, iv, content, chunksize=64*1024):
+    encryptor = AES.new(key, AES.MODE_CBC, iv)
+    if len(content) % AES.block_size != 0:
+        content = pad(content, AES.block_size)
+    # Prepend IV for use during decryption
+    return iv + encryptor.encrypt(content)
+
+
+def decrypt_content(key, content, chunksize=64*1024):
+    iv = content[:AES.block_size]  # Extract the IV from the beginning
+    # The rest is the actual encrypted content
+    content = content[AES.block_size:]
+    decryptor = AES.new(key, AES.MODE_CBC, iv)
+    return unpad(decryptor.decrypt(content), AES.block_size)
+
+
+
 def generate_random_key():
     return token_bytes(16)  # AES-128
+
+
+
+
+
+
+
+
+# def generate_random_key():
+#     return token_bytes(16)  # AES-128
+
+
+
 
 
 if __name__ == "__main__":
