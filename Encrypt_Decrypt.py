@@ -48,7 +48,7 @@ def encrypt_content(key, iv, content, chunksize=64*1024):
     return iv + encryptor.encrypt(content)
 
 
-def decrypt_content(key, content, chunksize=64*1024):
+def decrypt_content(key,iv, content, chunksize=64*1024):
     iv = content[:AES.block_size]  # Extract the IV from the beginning
     # The rest is the actual encrypted content
     content = content[AES.block_size:]

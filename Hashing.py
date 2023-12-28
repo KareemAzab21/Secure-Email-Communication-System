@@ -3,17 +3,17 @@ import os
 import hashlib
 
 
-def hash_file(filename):
-    """Generate SHA-256 hash of the given file."""
+def hash_content(content):
+    """Generate SHA-256 hash of the given content."""
     sha256_hash = hashlib.sha256()
 
-    with open(filename, 'rb') as f:
-        # Read and update hash string value in blocks of 4K
-        for byte_block in iter(lambda: f.read(4096), b""):
-            sha256_hash.update(byte_block)
+    if isinstance(content, str):
+        # If content is a string, encode it to bytes
+        content = content.encode('utf-8')
+
+    sha256_hash.update(content)
 
     return sha256_hash.hexdigest()
-
 
 # # Testing the Hashing function
 # if __name__ == "__main__":
